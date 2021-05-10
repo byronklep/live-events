@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
@@ -22,23 +22,25 @@ export default function AddEventPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
-    // Validation
-    const hasEmptyFields = Object.values(values).some((element) => element === '')
 
-    if(hasEmptyFields) {
+    // Validation
+    const hasEmptyFields = Object.values(values).some(
+      (element) => element === ''
+    )
+
+    if (hasEmptyFields) {
       toast.error('Please fill in all fields')
     }
 
     const res = await fetch(`${API_URL}/events`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(values)
+      body: JSON.stringify(values),
     })
 
-    if(!res.ok) {
+    if (!res.ok) {
       toast.error('Something went wrong')
     } else {
       const evt = await res.json()
